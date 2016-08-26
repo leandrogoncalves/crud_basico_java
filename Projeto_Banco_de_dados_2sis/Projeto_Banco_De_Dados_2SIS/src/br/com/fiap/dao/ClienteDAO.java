@@ -51,18 +51,19 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "Erro ao Inserir usuário.\n Detalhes: " + e.getMessage());
         }
     }
-
-    public void update(Cliente cliente, int id) {
+    
+    public void update(Cliente cliente, String nome) {
         try {
 
             con = ConnectionSingleton.getConnection();
-            sql = "UPDATE POO_CLIENTE SET (NOME = ?, DATA_NASCIMENTO = ?, ENDERECO = ?, FONE = ?, CAMINHO = ?)";
+            sql = "UPDATE POO_CLIENTE SET NOME = ?, ENDERECO = ?, DATA_NASCIMENTO = ?, FONE = ?, CAMINHO = ? WHERE NOME = ?";
             p = con.prepareStatement(sql);
             p.setString(1, cliente.getNome());
             p.setString(2, cliente.getEndereco());
             p.setDate(3, cliente.getDataNascimento());
             p.setString(4, cliente.getFone());
             p.setString(5, cliente.getCaminho());
+            p.setString(6, cliente.getNome());
             if (p.executeUpdate() > 0) {
                 msg = "Cliente atualzado com sucesso";
             } else {
@@ -71,6 +72,22 @@ public class ClienteDAO {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar usuário.\n  Detalhes: " + e.getMessage());
+        }
+    }
+
+    public void delete(String nome) {
+        con = ConnectionSingleton.getConnection();
+        sql = "DELETE FROM POO_CLIENTE WHERE NOME = ?";
+        try {
+            p = con.prepareStatement(sql);
+            p.setString(1, nome);
+             if (!p.execute()) {
+                msg = "Cliente deletado com sucesso";
+            } else {
+                msg = "Falha ao deletar usuário";
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir cliente\n" + e);
         }
     }
 
@@ -83,8 +100,8 @@ public class ClienteDAO {
             p = con.prepareStatement(sql);
             p.setString(1, nomeCliente);
             rs = p.executeQuery();
-            
-            while (rs.next()) {                
+
+            while (rs.next()) {
                 String nome = rs.getString("nome");
                 String endereco = rs.getString("endereco");
                 Date nasc = rs.getDate("data_nascimento");
@@ -92,14 +109,12 @@ public class ClienteDAO {
                 String caminho = rs.getString("caminho");
                 cli = new Cliente(nome, endereco, nasc, fone, caminho);
             }
-            
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar usuário.\n  Detalhes: " + e.getMessage());
         }
-        
+
         return cli;
     }
 
 }
-

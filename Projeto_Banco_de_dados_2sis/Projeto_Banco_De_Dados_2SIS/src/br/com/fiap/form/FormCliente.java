@@ -74,6 +74,8 @@ public class FormCliente extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -183,21 +185,50 @@ public class FormCliente extends javax.swing.JFrame {
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -213,35 +244,32 @@ public class FormCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSair))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnPesquisar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEscolherFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnPesquisar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEscolherFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSair)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -278,40 +306,34 @@ public class FormCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEscolherFotoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        try {
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            Date dataNascimento = new Date(formato.parse(txtNascimento.getText()).getTime());
-            String nome = txtNome.getText();
-            String endereco = txtEndereco.getText();
-            String fone = txtFone.getText();
-            Cliente cli = new Cliente(nome, endereco, dataNascimento, fone, caminho);
-            ClienteDAO dao = new ClienteDAO();
-            dao.insert(cli);
-            
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao converter a data!\n" + ex);
-        }
-
+        Cliente cli = pegarCampos();
+        ClienteDAO dao = new ClienteDAO();
+        dao.insert(cli);
+        limparCampos();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-       String nome = txtNome.getText();
-       ClienteDAO dao = new ClienteDAO();
-       Cliente cli = dao.getByName(nome);
-        if (cli == null) {
-            JOptionPane.showMessageDialog(this, "Cliente não encontrado");
-        }
-        else
-        {
-            txtNome.setText(cli.getNome());
-            txtEndereco.setText(cli.getEndereco());
-            txtFone.setText(cli.getFone());
-            ImageIcon imagem = new ImageIcon(cli.getCaminho());
-            lblFoto.setIcon(imagem);
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            txtNascimento.setText(formato.format(cli.getDataNascimento()));
-        }
+        Cliente cli = buscarCliente(txtNome.getText());
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        Cliente cli = buscarCliente(txtNome.getText());
+        if (cli  != null) {
+            Cliente novoCliente = pegarCampos();
+            ClienteDAO dao = new ClienteDAO();
+            dao.update(novoCliente, cli.getNome());
+            limparCampos();
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        Cliente cli = buscarCliente(txtNome.getText());
+        if (cli  != null) {
+            ClienteDAO dao = new ClienteDAO();
+            dao.delete(cli.getNome());
+            limparCampos();
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,6 +361,49 @@ public class FormCliente extends javax.swing.JFrame {
         });
     }
 
+    private Cliente pegarCampos() {
+        Cliente cli = null;
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date dataNascimento = new Date(formato.parse(txtNascimento.getText()).getTime());
+            String nome = txtNome.getText();
+            String endereco = txtEndereco.getText();
+            String fone = txtFone.getText();
+            cli = new Cliente(nome, endereco, dataNascimento, fone, caminho);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao converter a data!\n" + ex);
+        }
+        return cli;
+    }
+
+    private Cliente buscarCliente(String nome) {
+        Cliente cli = null;
+        ClienteDAO dao = new ClienteDAO();
+        cli = dao.getByName(nome);
+        if (cli == null) {
+            JOptionPane.showMessageDialog(this, "Cliente não encontrado");
+        } else {
+            txtNome.setText(cli.getNome());
+            txtEndereco.setText(cli.getEndereco());
+            txtFone.setText(cli.getFone());
+            ImageIcon imagem = new ImageIcon(cli.getCaminho());
+            lblFoto.setIcon(imagem);
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            txtNascimento.setText(formato.format(cli.getDataNascimento()));
+            caminho = cli.getCaminho();
+        }
+        return cli;
+    }
+
+    private void limparCampos() {
+        txtNome.setText("");
+        txtEndereco.setText("");
+        txtNascimento.setText("");
+        txtFone.setText("");
+        ImageIcon imagem = new ImageIcon();
+        lblFoto.setIcon(imagem);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnEscolherFoto;
@@ -353,6 +418,8 @@ public class FormCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JFormattedTextField txtFone;
