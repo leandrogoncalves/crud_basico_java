@@ -375,7 +375,7 @@ public class FormCliente extends javax.swing.JFrame {
             txtEndereco.setText(matriz[linha][1]);
             txtNascimento.setText(matriz[linha][2]);
             txtFone.setText(matriz[linha][3]);
-            caminho = matriz[linha][5];
+            caminho = matriz[linha][4];
             ImageIcon imagem = new ImageIcon(caminho);
             lblFoto.setIcon(imagem);
         }
