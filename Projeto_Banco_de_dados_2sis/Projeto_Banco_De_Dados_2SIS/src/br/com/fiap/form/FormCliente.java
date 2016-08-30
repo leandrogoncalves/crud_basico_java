@@ -10,6 +10,7 @@ import br.com.fiap.modelo.Cliente;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
@@ -25,6 +26,7 @@ public class FormCliente extends javax.swing.JFrame {
 
     private MaskFormatter mascaraNasncimento, mascaraFone;
     private String caminho;
+    private String[][] matriz;
 
     /**
      * Creates new form formCliente
@@ -209,7 +211,7 @@ public class FormCliente extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "Ebdereço", "Data de Nascimento", "Fone"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -402,6 +404,24 @@ public class FormCliente extends javax.swing.JFrame {
         txtFone.setText("");
         ImageIcon imagem = new ImageIcon();
         lblFoto.setIcon(imagem);
+    }
+    
+    private void atualizarTabela(){
+        ClienteDAO dao = new ClienteDAO();
+        List<Cliente> lista = dao.getAll();
+        matriz = new String[lista.size()][5];
+        Cliente cliente;
+        SimpleDateFormat formato = new SimpleDateFormat("dd//MM/yyyy");
+        for (int i = 0; i < lista.size(); i++) {
+            cliente = lista.get(i);
+            matriz[i][0] = cliente.getNome();
+            matriz[i][1] = cliente.getEndereco();
+            matriz[i][2] = formato.format(cliente.getDataNascimento());
+            matriz[i][3] = cliente.getFone();
+            matriz[i][4] = cliente.getCaminho();
+            
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

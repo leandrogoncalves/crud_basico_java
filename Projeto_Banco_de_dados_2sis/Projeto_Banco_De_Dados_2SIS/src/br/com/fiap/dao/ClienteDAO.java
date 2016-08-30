@@ -8,11 +8,14 @@ package br.com.fiap.dao;
 import br.com.fiap.conexao.ConnectionSingleton;
 import br.com.fiap.modelo.Cliente;
 import br.com.fiap.modelo.Usuario;
+import com.sun.security.ntlm.Client;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -117,4 +120,35 @@ public class ClienteDAO {
         return cli;
     }
 
+    public List<Cliente> getAll(){
+        List<Cliente> lista = null;
+        con = ConnectionSingleton.getConnection();
+        sql = "SELECT * FROM POO_CLIENTE";
+        try{
+            p = con.prepareStatement(sql);
+            rs = p.executeQuery();
+            lista = gerarLista();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar todos os usuários");
+        }
+        return lista;
+    }
+    
+    private List<Cliente> gerarLista() throws SQLException {
+        List<Cliente> lista = new ArrayList();
+        String nome, endereco, fone, caminho;
+        Date nascimento;
+        
+        while(rs.next()){
+            nome = rs.getString("nome");
+            endereco = rs.getString("endereco");
+            fone = rs.getString("fone");
+            caminho = rs.getString("caminho");
+            nascimento = rs.getDate("data_nascimento");
+            lista.add(new Cliente(nome, endereco, nascimento, fone, caminho));
+        }
+        
+        return lista;
+    }
+    
 }
